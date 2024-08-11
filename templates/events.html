@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event Registration System</title>
+    <style>
+        body {
+            background-color: #f0f8ff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            font-family: Arial, sans-serif;
+        }
+        h1 {
+            text-align: center;
+        }
+        .event-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        .event-box {
+            background-color: #fff;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            margin: 10px;
+            padding: 20px;
+            width: 300px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+        .event-box h2 {
+            margin-top: 0;
+        }
+        .event-box p {
+            margin: 5px 0;
+        }
+        .register-button {
+            margin-top: 10px;
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <h1>Event Registration System</h1>
+    <div class="event-container">
+	{% for event in events %}
+	    <div class="event-box">
+		    <h2><a href="/events/{{ event._id }}">{{ event.name }}</a></h2>
+		    <p>Place: {{ event.location }}</p>
+		    <p>Time: {{ event.time }}</p>
+		    <p>Price: ${{ event.ticket_price }}</p>
+		    <p>Organizer: {{ event.organizator }}</p>
+		    <button onclick="location.href='/registrations/{{ event._id }}'" class="register-button">
+			    Register
+		    </button>
+            </div>
+	{% endfor %}       
+    </div>
+</body>
+</html>

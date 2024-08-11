@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event Details</title>
+    <style>
+        body {
+            background-color: #f0f8ff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            font-family: Arial, sans-serif;
+        }
+        h1 {
+            text-align: center;
+        }
+        .details-container {
+            background-color: #fff;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            padding: 20px;
+            width: 300px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+        .details-container p {
+            margin: 10px 0;
+        }
+	.register-button {
+	    padding: 10px 20px;
+	    background-color: #4CAF50;
+	    color: white;
+	    border: none;
+	    border-radius: 5px;
+	    cursor: pointer;
+	}
+    </style>
+</head>
+<body>
+    <h1>Event Details</h1>
+    <div class="details-container">
+	    <h2>{{ event.name }}</h2>
+	    <p><strong>Place:</strong>{{ event.location }}</p>
+	    <p><strong>Time:</strong>{{ event.time }}</p>
+	    <p><strong>Price:</strong>{{ event.ticket_price }}</p>
+	    <p><strong>Organizer:</strong>{{ event.organizator }}</p>
+	    <p><strong>Description:</strong>{{ event.description }}</p>
+	    {% if registered %}
+		<button type="submit" onClick="fetch(
+				'/registrations?id={{ event._id }}',
+		    		{ method: 'DELETE' })
+				  .then(() => {
+					window.location.href='/registrations';
+				  });">
+		    Cancel
+		</button>
+	    {% else %}
+	    	<button onclick="location.href='/registrations/{{ event._id }}'" class="register-button">
+		    Register
+	    	</button>
+	    {% endif %}
+    </div>
+</body>
+</html>
